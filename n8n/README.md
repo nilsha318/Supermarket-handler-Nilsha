@@ -26,14 +26,18 @@ Every Morning 8 AM          starts the run (only after the workflow is Published
         ↓
 Calculate & Save Discounts  UPDATE products: ≤1 day left → 30%, ≤3 days → 20%,
         ↓                   expired → 0% + "EXPIRED - Remove from shelf"
-Get Products Needing        one row: total = number of products,
-Attention                   product_list = text list for the email
-        ↓
+Get Products Needing        one row: total, expired, items (one entry per product
+Attention                   with department, price, new price, days left) and
+        ↓                   staff (active employees per department)
 Any Products?               total > 0 ? continue : stop (no email)
         ↓
-Email Manager (Gmail)       subject/body filled with {{ $json.total }} and
-                            {{ $json.product_list }}
+Build Manager Email (Code)  builds the HTML email from the manager-alert.html layout
+        ↓                   (readable copy: email-templates/build-manager-email.js)
+Email Manager (Gmail)       Email Type = HTML · subject {{ $json.subject }} ·
+                            message {{ $json.html }}
 ```
+
+**Button:** "See today's offers" opens the public customer offers page (`DASHBOARD_URL` at the top of **Build Manager Email**). Use the published app link (`…budibase.app/app/…`), not the builder link.
 
 `products_live` and `customer_offers` are **views**. They work out the discount from today's date every time they are read, with the same rules as this workflow, so the dashboards and offers page are right even before n8n runs. n8n saves the discount in the `products` table and sends the email. It never writes to the views.
 
