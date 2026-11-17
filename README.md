@@ -5,6 +5,12 @@ Every morning it checks all expiry dates, gives products a discount, tells the m
 
 Built in one week by a team of 7 with **PostgreSQL (Supabase)**, **n8n** and **Budibase**.
 
+> **Try the live app**
+> - **Today's offers (customers, no login):** https://yuvtuhj0b.budibase.app/app/default%20workspace/supermarket-dashbord#/public-offers
+> - **Staff app (manager and employees, login needed):** https://yuvtuhj0b.budibase.app/app/default%20workspace/supermarket-dashbord
+>
+> Want your own copy? Follow the [setup guide](SETUP-GUIDE.md).
+
 ---
 
 ## The problem and the idea
@@ -88,10 +94,10 @@ The views `products_live` and `customer_offers` calculate the discount from toda
 
 ### Live app
 
-- **App:** https://yuvtuhj0b.budibase.app/app/default%20workspace/supermarket-dashbord
-- **Public offers page:** the same link + `#/public-offers`
+- **Staff app:** https://yuvtuhj0b.budibase.app/app/default%20workspace/supermarket-dashbord
+- **Public offers page:** https://yuvtuhj0b.budibase.app/app/default%20workspace/supermarket-dashbord#/public-offers
 
-Use the published link above, not the Budibase builder link (the builder asks for a builder login).
+Use these published links, not the Budibase builder link (the builder asks for a builder login). How to use them: [SETUP-GUIDE.md](SETUP-GUIDE.md#use-the-app).
 
 ---
 
@@ -123,6 +129,7 @@ archive/
 .github/                    pull request template
 .env.example                names of the connection settings (no real values)
 AGENTS.md                   rules for AI coding agents working in this repo
+SETUP-GUIDE.md              how to use the app and set up your own copy
 PROJECT_PLAN.md             1-week plan, tasks and demo script
 ```
 
@@ -131,40 +138,23 @@ Every part folder has its own README with the detailed setup:
 
 ---
 
-## Getting started
+## Use the app or set up your own copy
 
-### 1. Get the code
+[SETUP-GUIDE.md](SETUP-GUIDE.md) explains step by step:
 
-```
-git clone <your-fork-url>
-cd <repo-folder>
-git checkout -b <your-branch>
-```
+- how customers, the manager and employees **use the app** (with the links),
+- how to **set up your own copy**: Supabase, Budibase and n8n,
+- how to **check** that everything works together, and
+- **what to do if something goes wrong**.
 
-The main repo is `sandra1-8/Supermarket-handler`, branch **`master`**. Work on a branch in your fork and open a Pull Request to `master`.
+---
 
-### 2. Database
+## For team members
 
-- **Shared database (team):** Cindra shares the connection details in the private group chat. Don't create the tables again.
-- **Your own test database (optional):** create a free Supabase project → **SQL Editor** → paste `database/database.sql` → **Run**.
-
-Details: [database/README.md](database/README.md).
-
-### 3. n8n
-
-1. In n8n, **Import → From File** → `n8n/expiry-check.json` or `n8n/notifications.json`.
-2. Create a **Postgres** credential with the **Session pooler** details (n8n Cloud can't use the direct connection). Turn on SSL **Require** and **Ignore SSL Issues**.
-3. Sign in with Google in the Gmail node and set a real **To** address (`manager@example.com` is a placeholder).
-4. **Execute** to test. **Publish** turns on the daily schedule. Publish each workflow in **one** n8n workspace only, otherwise everyone gets every email twice.
-
-Details: [n8n/README.md](n8n/README.md).
-
-### 4. Budibase
-
-One shared Budibase app connected to the same PostgreSQL database. Each member edits only their own screens.
-Roles: **Admin** (manager), **Basic** (employee), **Public** (offers page).
-
-Details: [dashboards/README.md](dashboards/README.md).
+- The main repo is `sandra1-8/Supermarket-handler`, branch **`master`**. Work on a branch in your fork and open a Pull Request to `master`.
+- **Shared database:** Cindra shares the connection details in the private group chat. Don't run `database.sql` on it, because that deletes everyone's data.
+- **Shared Budibase app:** edit only your own screens.
+- **n8n:** publish each workflow in **one** n8n workspace only.
 
 ---
 
