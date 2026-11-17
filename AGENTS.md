@@ -63,7 +63,7 @@ Use the skill `discount-check` to verify them.
 1. Plan first, then change one thing at a time. Show the diff before you accept it.
 2. Change only the files of the task you were given. Each team member owns their own folder
    (see `PROJECT_PLAN.md`).
-3. Never commit or push unless a team member asks you to. Never push to `main`; use your branch and a pull request.
+3. Never commit or push unless a team member asks you to. Never push to `master`; use your branch and a pull request.
 4. Use the pull request checklist in `.github/pull_request_template.md`.
 5. Write plain, short English in docs. Dates are relative to today in the sample data, so do not hard-code dates.
 
